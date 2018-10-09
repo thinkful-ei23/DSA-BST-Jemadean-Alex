@@ -18,7 +18,8 @@ function main() {
   // HEIGHT OF A BST
   // Input is a BST
   // OUTPUT WILL BE A NUMBER WITH THE HEIGHT | should be 5
-  console.log(heightOfBST(BST));
+  console.log(isItBST(BST));
+
 
 }
 
@@ -38,6 +39,38 @@ function heightOfBST(binarySearchTree) {
   } else {
     return 1;
   }
+}
+
+//IS IT BST?
+//input: binary tree--no more than 2 children
+//output: boolean; true if BST, false if only binary tree
+//binary search tree is binary tree with lower values on left, higher values on right
+//look at every node, if (node.left !== null && node.left.value < node.value) && (node.right !== null && node.right.value > node.value)
+
+function isItBST(binaryTree) {
+  if((binaryTree.left !== null && binaryTree.left.value < binaryTree.value) && (binaryTree.right !== null && binaryTree.right.value > binaryTree.value)) {
+    let option1 = isItBST(binaryTree.left);
+    let option2 = isItBST(binaryTree.right);
+    if (option1 === true && option2 === true) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (binaryTree.left !== null) {
+    if (binaryTree.left.value < binaryTree.value) {
+      return isItBST(binaryTree.left);
+    }
+    return false;    
+  } else if (binaryTree.right !== null) {
+    if (binaryTree.right.value > binaryTree.value) {
+      return isItBST(binaryTree.right);
+    }
+    return false;    
+  } else {
+    return true;
+  }
+
+
 }
 
 main();
