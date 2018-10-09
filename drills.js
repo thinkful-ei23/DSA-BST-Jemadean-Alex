@@ -12,38 +12,32 @@ function main() {
   BST.insert(2, 2);
   BST.insert(5, 5);
   BST.insert(7, 7);
-  // console.log(BST.right.right.right.left.left === null);
-
+  BST.insert(15, 15);
+  BST.insert(16, 16);
+  
   // HEIGHT OF A BST
-
-  // console.log(BST.find(3));
-
   // Input is a BST
   // OUTPUT WILL BE A NUMBER WITH THE HEIGHT | should be 5
   console.log(heightOfBST(BST));
-  // console.log(BST);
 
 }
 
 function heightOfBST(binarySearchTree) {
-  let height = 0;
-  console.log(binarySearchTree);
-
-  // look at node and see if they have a left and right
-  // explore them until we get a NULL for a child node
-  if(binarySearchTree === null) {
-    return height;
-  }
   if(binarySearchTree.left !== null && binarySearchTree.right !== null) {
-    if(binarySearchTree.left.left !== null && binarySearchTree.left.right !== null) {
-      return heightOfBST(binarySearchTree.left.left);
+    let option1 = heightOfBST(binarySearchTree.left) + 1;
+    let option2 = heightOfBST(binarySearchTree.right) + 1;
+    if (option1 > option2) {
+      return option1;
+    } else {
+      return option2;
     }
+  } else if (binarySearchTree.left !== null) {
+    return heightOfBST(binarySearchTree.left) + 1;
+  } else if (binarySearchTree.right !== null) {
+    return heightOfBST(binarySearchTree.right) + 1;
+  } else {
+    return 1;
   }
-
-
-
-
-  return height;
 }
 
 main();
